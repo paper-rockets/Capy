@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <title>Capybara Springs</title>
+    <link rel="icon" type="image/webp" href="ui/mochi_happy.webp" />
+    <style>
+      @font-face { font-family: Nunito; src: url('Nunito.ttf'); font-weight: 200 1000; }
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #9fcf8a; font-family: Nunito, system-ui, sans-serif; touch-action: none; user-select: none; }
+      #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+      #leaves { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+      #compare { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; opacity: 0; transition: opacity 0.25s; }
+      #compare.on { opacity: 1; }
+      .sign { position: fixed; top: 14px; left: 14px; padding: 8px 16px 9px; border-radius: 14px; background: linear-gradient(#8a5a33, #6d4424); color: #fff4dc; box-shadow: 0 3px 0 #4b2d15, 0 6px 14px rgba(0,0,0,0.25); border: 2px solid #b07a48; }
+      .sign b { display: block; font-size: 20px; font-weight: 900; letter-spacing: 0.2px; }
+      .sign small { font-size: 12px; opacity: 0.9; }
+      .tools { position: fixed; top: 96px; right: 12px; display: flex; align-items: center; gap: 6px; }
+      /* small text buttons for testing (Debug, Compare) */
+      .tools button { font: 800 13px Nunito, sans-serif; color: #5a3a1d; background: #fff4dc; border: 2px solid #c79a62; border-radius: 12px; padding: 5px 10px; box-shadow: 0 3px 0 #b88a55; cursor: pointer; min-height: 34px; opacity: 0.85; }
+      /* the painted round wooden buttons (Codex): menu, full screen */
+      .tools button.round { width: 56px; height: 56px; min-height: 0; padding: 0; border: 0; border-radius: 50%; background: none; box-shadow: none; opacity: 1; transition: transform 0.12s; }
+      .tools button.round img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; filter: drop-shadow(0 3px 3px rgba(0,0,0,0.3)); }
+      .tools button.round:active { transform: scale(0.92); }
+      #fps { position: fixed; top: 158px; right: 14px; font: 700 12px Nunito, sans-serif; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+      #hint { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); font: 700 14px Nunito, sans-serif; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.55); }
+      @media (max-height: 520px) { .tools { top: 44px; right: 8px; gap: 4px; } .tools button { font-size: 11px; padding: 3px 7px; min-height: 26px; } .tools button.round { width: 40px; height: 40px; } #fps { top: 88px; } #hint { font-size: 12px; bottom: 4px; } }
+      #loading { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; background: radial-gradient(circle at 50% 42%, #e3f3cf, #b9dc98); transition: opacity 0.4s; }
+      #loading.done { opacity: 0; pointer-events: none; }
+      #loading div { font: 800 18px Nunito, sans-serif; color: #5a3a1d; text-align: center; }
+      #loading img { display: block; width: min(560px, 82vw); max-height: 62vh; object-fit: contain; margin: 0 auto 8px; filter: drop-shadow(0 6px 10px rgba(60,40,10,0.25)); }
+    </style>
+  </head>
+  <body>
+    <canvas id="game"></canvas>
+    <img id="leaves" src="front_leaves.png" alt="" />
+    <img id="compare" alt="" />
+    <div class="tools">
+      <button id="btn-compare" title="Show the target picture">Compare</button>
+      <button id="btn-menu" class="round" title="Menu" aria-label="Menu"><img src="ui/btn_menu.webp" alt="" /></button>
+      <button id="btn-full" class="round" title="Full screen" aria-label="Full screen"><img src="ui/btn_full.webp" alt="" /></button>
+    </div>
+    <div id="hint">Tap anywhere to walk · WASD also works</div>
+    <div id="fps"></div>
+    <div id="loading"><div><img src="ui/title_logo.webp" alt="Capybara Springs" /><span id="loading-status">Growing the meadow…</span></div></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

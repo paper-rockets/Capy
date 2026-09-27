@@ -1,0 +1,7 @@
+{
+  "name": "capy-speedtest",
+  "private": true,
+  "type": "module",
+  "description": "Tablet speed tests (tablet.mjs, profile.mjs) and headless screenshots (shoot2.mjs). Run: npm install here once.",
+  "dependencies": { "puppeteer-core": "^23.11.1" }
+}
